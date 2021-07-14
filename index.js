@@ -23,10 +23,12 @@ function renderHTML(pathname, res) {
 }
 
 http.createServer(function (req, res) {
-    var pathname = req.url.substring(1) + '.html'
+    var pathname = req.url.substring(1)
+    if(req.url.substring(req.url.length - 5) !='.html' || req.url.length === 0) {
+        pathname = pathname + '.html'
+    }
     if(pathname === '.html') pathname = 'index.html'
     if(pathname != "favicon.ico") {
-        console.log(pathname)
         renderHTML(pathname, res)
     }
 }).listen(8081);
